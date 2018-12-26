@@ -1,0 +1,431 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <script>
+     
+    var src_canvas; 
+    var src_ctx;
+    let model;
+    var image;
+    var classesletter=['a','b','c','d','e','f','g','h','k','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];  
+	var variants_predict=['doyoubeliveinmiracles','puddingpops','eightysix','tunafish','quidproquo','lameduck','meatwithgravy','lawngiland','howsitgoing','realhoopyfrood','walkthewalk','pushtheedge','cutthemustard','paperjam','candothis','onesmallstepforman','hoverhand','slipperyslope','seashore','runfarther','quotations','thedennissystem','surfaceintegral','hastemakeswaste','sleeptight','Iamtomorrow','twoleftfeet','goestoeleven','soundout','milkshake','headhoncho','thankyou','winning','pushon','toweldry','nevermind','topsyturvy','itiscertain','wildgoosechase','withbellson','friendzone','paperplate','allyourbase','nevergonnagiveyouup','complexnumber','loveydovey','moreinternets','winhandsdown','nomeansno','offtherecord','hellonewman','lizardpoisonsspook','applejuke','oldshoes','davidafterdentist','letmeknow','itssupereffective','marsrover','willynilly','comfortzone','easyascake','thebeesknees','puppylove','yesdefinitely','unchartedisland','milokoplus','jumpover','bigbrother','omnomnom','IthinkIcan','getout','markitzero','needabiggerboat','kittykat','carryatrowel','paintitred','fallguy','weaselwords','pickledpeppers','cherryontop','lardydardy','youfirst','havefun','earcandy','sorrydave','chowdown','bonusround','hookworm','badapples','sourgrapes','lookbothways','faitaccompli','inthecat','riverstyx','snamesame','leapsandbounds','collaborareandlisten','halcyondays','wellisntthatyspecial','spicyhot','upvotethis','takealook','inthedoldrums','visais','runthrough','totalshamble','drycleanonly','gordonbennett','beantown','ivorytower','thatisyourquest','nowquaint','mayanruins','spicy','wegoforwards','thathurts','leavemealone','takecare','fieldday','itdoesn’tcount','hardlines','playball','thisissparta','nobrainer','queennefertiti','extracheese','saveface','amIhappy','fashionvictim','butlerdidit','fulltilt','cabbageborsht','civilwar','carryon','steampunk','steveholt','madscience','halfempty','upordown','oneway','breadoflife','cartrouble','rollover','exclamation','mybetterhalf','rodentsofunusualsize','brokenrecord','catsdade','rhyrningslang','jimmyhorner','hardcheese','firstwater','freshwater','movealong','hoipolloi','dobedobedo','yourenotlistening','notinkansas','generaltso','snaredrum','momanadad','wintersnow','frabjousday','dharmainitiative','skynetknows','shillyshally','sharppencil','ohwait','fullofstars','seemslegit','forthegipper','treatyoself','funwithflags','pointtopoint','soso','thinkcreatedo','levelplayingfield','buffalowing','pipedown','sheldonalphafive','pieareround','buckleyourshoe','geezlouise','heebiejeebies','primetime','narrowminded','wouldyoubelieve','tealeaf','Isee','toboot','blackjack','writingdesk','bakedinapie','selectfrontable','sciencefair','sixesandsevens','oopsadaisy','dynamoclock','whoathere','topnotch','curryfavour','stoolpigeon','heybrother','Iloveyou','fishandchips','foolsparadise','blessyou','pondlife','garlicyum','becareful','nevergiveup','coffeecan','rubiconcrossed','dragonwithmatches','goosebumps','getwell','passinglane','cheesefries','gungho','sunshine','nodice','rosielea','feetofsnow','twotone','pickme','thinair','viennacalling','battleroyale','seekbeauty','sulphersmell','foulplay','cleanandshiny','bathwater','shoeshine','rollingstone','roygbiv','babyblues','flipflops','dogapus','forthebirds','catsanddogs','playitagainsam','spruceup','burningoil','notyet','hardcaptchaishard','vicevesa','watchout','justdance','cookiecutter','teaearlgrayhot','smellingsalt','creativevision','firebrimstone','readysetgo','fifthcolumn','mishmash','thebigcheese','forbiddenfruit','handsdown','mooshoopork','meddlingkids','happyclappy','bettercallsaul','doodahman','snowshovel','howdypartner','spellingbee','againstthegrain','hocuspocus','wildandcrazyguys','nyoustrate','thebigapple','nittygritty','accidentallyonpurpose','workout','frabinusday','reachhigher','exceedinglywellread','slowdown','questioneverything','badegg','beautifulfriendship','squirrelfriend','whowhatwhere','xylophone','toodleoo','hoagieroll','agreetodisagree','comeondown','knowtheropes','powertool','highflyer','capitalgain','tallbuilding','awesomedude','youtheman','sonicscrewdriver','notabot','mymndseye','copanattitude','respectme','bondjamesbond','chinboy','timemachine','vegout','biggerintexas','noholdsbarred','kissme','anothercastle','thirtyonedays','goodnight','domesticspying','scienceitworks','hellosweetie','grapesoda','drummerboy','catgotyourtongue','rackandruin','bizarrojerry','honeymustard','howaboutthat','eatyourdinner','lagerfrenzy','shootthrough','paytheferryman','sharpstick','porkpies','lollypop','skipaturn','englishmuffin','fezesarecool','takenaback','isithotinhere','leavebritheyalone','gadzooks','yesmaam','beltup','heartache','poeticjustice','pumpkinpie','loveisblind','makemyday','knickknack','sevenatenine','motleycrew','onceagain','boomerang','globalwarming','getoverit','poiintblank','evileye','babyboomer','goodgrief','threestrikes','sorrysight','spaceisbig','ridethesubway','mybad','brokenheart','blueribbon','ringfencing','livetransmission','untilnexttime','kindnessofstrangers','nicemarmot','gathersmoss','thereisnospoon','clearbluewater','coldcomfort','pressintoservice','cheeseburger','londoncalling','tunein','mumstheword','don’tbelate','pennyloafer','yadayada','blackMonday','smellthat','dogsdinner','learntheropes','strikeamatch','scienceclass','justdeserts','whateven','attilathehun','pushharder','betternexttime','that’shot','inthelimelight','mainchance','dinnerbell','backgroundnoise','fastasleep','pattycake','weakestlink','lawofsines','catspajamas','mumbojumbo','goodluck','mooncheese','untiltomorrow','safetyfirst','nercolascerg','groundhogday','trickledown','returntosender','moveover','twentythree','takeanumbrella','inspades','remaincalm','brandsparkingnew','nospoon','perfectworld','dalekasylum','sodslaw','elevatorgoingup','heavenstobetsy','timewilltell','challengeaccepted','drinkmilk','letmeout','roadlesstravelled','upwardslope','pegout','sleaptight','imsorrydave','topdog','whoisit','fullstop','bowtiesarecool','brickhouse','blahblahblah','forgetthis','labouroflove','goodriddance','that’senougth','creativeprocess','grumpycat','alldancing','baittheline','drivemetofirenze','allergicreaction','tideover','frozenpeas','glazeddonut','gimmepizza','makehaste','doyouloveme','rentaswag','technicoloryawn','marryme','changetheworld','fruitsalad','cutandrun','abidewithme','charmoffensive','dearbluewater','nowandforever','philadelphia','rhodeisland','needsmust','pesterpower','leftorright','pathlesstaken','pepperpot','slythytoves','sudomakesandwich','followme','youcandothis','whatsthat','grainofsalt','silverlining','awesomesauce','bluecheese','outlookgood','learnsucceed','raisecain','thisisnotfake','hotdogroll','fancyfree','domoresitups','lightsleeper','forsure','uppercrust','playagame','spendtime','brushyourteeth','cardsharp','imblessed','nosyparker','soufflegirl','untiedlaces','misterwilson','wildwest','hardenedprestoopnicks','freehat','picklejuice','fullmonty','thereisonlyzul','genghiskhan','filthydirtymess','motherearth','wideberth','winteriscoming','wellread','mrsrobinson','applesauce','klatuberadanikto','lolcat','coveredbridge','bloddtype','doyoubelieveinmiracles','horsesmouth','livelovetype','veganzombiewantsgrains','righthandturn','circleoflife','nicejob','metropolis','hamandcheese','doctorwho','pepplelikeme','goodygumdrop','thankyoucomeagain','whatever','buysometime','hadmeathello','azgothsofkria','readmymail','majorintersection','tuckeredout','primrosepath','ladiesfirst','goodmorning','stonesoup','starwarskid','onefellswoop','comewhatmay','doctorcaligari','trainsurfing','goodevening','saycheese','pellmell','cubicspline','bytheboard','saltandpepper','yesthisisdog','stickywicket','alwaysthere','knowthyself','turkeysandwich','pickledypeppers','imustacheyouwhy','lollerskates','Icandothis','viciouscycle','steeringwheel','runfather','nobodyhome','spoilers','armytraining','sacredcow','longdivision','stonyhearted','bottledwater','frenchphrases','jamtomorrow','droptableusers','howinteresting','inthecart','zigzag','superstar','beseriousnow','thinkhard','okeydokey','teawithmilk','takewrongturns','twentyeightdays','softkittywarmkitty','havecourage','hugme','backtrack','shesells','generation','halffull','oncloudnine','rightleft','queenofhearts','hitthesack','reduplicatedphrases','ifitfits','cornedbeef','that’sright','neadcase','bikerider','tickledpink','ruleofthumb','powerdressing','blackandwhite','clownaround','walkfree','slushfund','areyouthekeymaster','geewhiz','creepycrawler','wingit','shoulderoforion','gonedolally','mintyfresh','momanddad','neverquit','signspointtoyes','hereisjohnny','runamok','rumdo','sauerkraut','nyquistrate','smokedsalmon','headcase','newyorkcity','wheelgroup','standbyme','sincewhen','headsup','crosstherubicon','thecatlady','milkwasabadchoice','poisonapple','grilledcheese','votepancakes','dishwater','mustachioed','timessquare','steakandeggs','goldrecord','maresnest','firstcontact','leftyloosey','countingsheep','sheloveshim','lessismore','kickthecan','loafofbread','vegetarian','thatescalatedquickly','qualitytime','yellowbelly','uncleleo','easypeasy','constructionahead','mostlikely','boxofchocolates','snowflurry','fadeaway','getyourgoat','timeflies','mostinterestingman','jiminycricket','cheesesteack','solifelike','bemyfriends','vansurfing','heateddebate','collaborateandlisten','bunnyrabbit','opensesame','knockback','morningperson','toolate','ifdoesn’tcount','fancyplants','theyateit','onceuponatime','antidentite','loandbehold','watergate','wheretogo','fourbytwo','knockatthedoor','dollarbill','checkyourwork','higgsboson','noway','holdyourhorses','asIseeit','bazinga','urbanmyth','fathertime','overthere','geneparmesan','hoitytoity','pipinghot','bluesky','tickletheivories','noregrets','goodygoodygumdrops','gridlock','gangnamstyle','roughdiamond','tickedoff','infradig','thickandthin','nipandtuck','openseason','hushpuppies','feedingfrenzy','grandslam','pleasedaspunch','dragrace','turnsignal','magicdecoderring','pieceofcake','justfriends','starspangled','coldturkey','youwin','hightime','frenchfries','riceandbeans','Ilikepeople','saxandviolins','suntzusays','loveme','runnynose','crocodiletears','areyouready','stopwastingtime','theoneeyedmanisking','evilgenius','welldone','whoareyou','greatscott','sharppenai','creamandsugar','nauticalphrases','Iwantcontrol','littlebirdtoldme','applepie','flatfoot','hamburgerbun','idkmybffjill','pandorasbox','rackyourbrains','buttonfly','blindedbyscience','larkabout','raspberrytart','andthat’sthewayitis','thisstatementisfalse','thenightmancometh','visavis','trustme','magneticmonopole','heatup','squeakyclean','keyboard','nowlookhere','exercisemore','librarybook','sevensigns','manyhappyreturns','knowyourparadoxes','silverbullet','naptime','carpediem','whetyourappetite','Ilovelamp','melodypond','marblerye','badbooks','mybeatingheart','underthesea','thisisit','thinkgreen','nestegg','happyretirement','babelfish','lostlove','greasedlightning','leaphigher','nambypamby','jaygatsby','arewethereyet','dnimhead','mindthegap','canIlove','vogonpoetry','forgetyou','tallstory','summoninglip','nostinkinbadges','Icanfixit','livingthings','khyberpass','takeumbrage','frenchfried','mymindseye','stinkyfeet','theextramile','that’sit','awildcaptchaappears','carygrant','saveourbluths','jerrybuilt','Iliketurtles','alloftheabove','cleanhands','routeone','linearalgebra','dreambig','imcoldbrr','smallfry','Ilovedeadlines','howareyou','cabbagestew','poolhouse','icetomeetyou','giantbunnyrabbit','ofcourse','oxocube','heartscontent','royalflush','oldmanwinter','caesarsalad','dicedonion','knuckledown','hearmeroar','headoverheels','windowdressing','crosstheroad','fuzzywuzzy','overthemoon','happyanniversary','goberserk','Iamcaptcha','thereoncewas','benice','beeline','stinglikeabee','rowboat','ithappens','countyourchange','tasteslikechicken','musicmachine','wellnow','pushtheenvelope','backtobasics','bigscreen','coleslaw','sheeseburger','happyblessings','scotfree','candyapple','letitbe','goodytwoshoes','imsorry','outofsorts','startfromscratch','liveyourdream','playagain','somebodythatIusedtoknow','blackcoffee','fellowtraveller','talkturkey','shakealeg','yeahright','morecoffee','anoff','gothicarch','mathtest','lookingglass','togetheragain','jumphigher','asyouwish','liveloveinternet','sleepyhollow','learnchallengeimprove','yaddayaddayadda','murphyslaw','thebigeasy','imyours','ursrover','blazeatrail','knockonwood','giveortake','withoutadoubt','pointblank','thinktwice','earmark','borntorun','cliffhanger','berlinwall','littlesister','Iknownothing','bigkahunaburger','fishusmeti','bythebook','practicemakesperfect','Ithinkso','peterout','vorpalsword','wickedwitch','youdon’tsay','singasong','wholenineyards','doeadeer','ohbrother','foregoneconclusion','onedaymore','brandspankingnew','itwillpass','bonuspoints','spaceplumber','chaiselounge','eaffhanger','karmapoints','curatesegg','sweetypie','aprilmay','reversethepolarity','downwardslope','farsicalaquaticceremony','higgledypiggledy','eatyourvitamins','ohsigh','doubledutch','smallfries','hathead','playhookey','stringalong','createnewthings','whatfor','toecurling','braaains','upandaway','mouthwatering','gogadgetgo','manywishes','moveablefeast','truelife','inthebox','rooftop','checkyourcoat','rinkydink','toastpoints','drugsarebadmkay','plentyoftime','lovelife','eatyourveggies','whoopsadaisy','spindoctor','laserbeams','skidrow','wellisntthatspecial','lunchtime','stumpup','greasetheskids','inlimbo','coloredpaper','youarehappy','propaneaccessories','itsover','flipadelphia','ohhai','haveaninkling','callmemaybe','darkhorse','bonvoyage','dragonfly','sickpuppy','heresjohnny','upsadaisy','deadringer','inovermyhead','raintonight','wisdomteeth','hotdiggitydog','vanillaicecream','toysoldier','meowmeow','neartannhausergate','onanattitude','aprilshowers','intheair','sharedrum','missyou','talkthetalk','beenthere','chickensoup','duvetday','rosebud','stepback','livelife','hairyeyeball','longinthetooth','riseandshine','skysthelimit','welcometoearth','batedbreath','loveyou','don’tcountonit','shesellsseashell','partialderivative','insideout','sincostan','walktheplank','cucumbersandwich','doordonot','wantmore','bathtowel','birthdaygirl','dramaticchipmunk','pointsdon’tmatter','guitarplayer','plainsailing','teawithjam','deadbattery','beerinabottle','boiledcabbage','fathomout','ermahgerdcapcher','howsweet','plusorminus','doublewhammy','morechocolate','franklymydear','snakeeyes','pizzatopping','ohsoclose','libertybell','toomanysecrets','theotherside','trafficjam','pipedream','armytrainingsir','nosebleed','uuddlrlrba','endofstory','moviestar','jackbenimble','realmccoy','hammertime','birthdayboy','buttersidedown','doublecross','warpspeed','whowhanwhere','bloodtype','captchaintherye','redtape','that’smyspot','bananabread','pointtopint','Saturdaydetention','fallingpianos','catchtheman','learnfrommistakes','piggyback','shanecomeback','shakersandmovers','goodfornothing','1.21gigawatts','junejuly','whistleandflute','sabertooth','riversong','fishon','goodasgold','hattrick','trafficlight','threeshortwords','yessir','Ilikeyou','tacoTuesday','havepurpose','clickclickclick','deepthought','thinkingcap','lidcetysplit','sandybeach','voigtkampf','doubletime','snapshot','don’tstop','towekdry','caseclossed','benimblebequick','mincedoaths','raingoaway','laughatme','takethecake','heebiejeebles','illmaketea','seashell','stellastella','soundofsirens','loseface','birdcage','magiceightball','bytheseashore','crabcake','flatout','leftright','dearsir','isithot','mydearwatson','readallover','doalittledance','rhymingslang','spittingimage','glassceiling','seesaw','cropup','outtherecord','travelsize','sausages','that’safactjack','letseat','bananastand','onaboat','enjoylife','imbatman','hellowatson','moneylender','nofriendofnine','roastbeef','takeoutfood','gothicchurch','finagleslaw','wholeshebang','bookreading','unionjack','goldmedal','timeandpaper','comeclean','pluggednickel','hodogroll','gofurther','stinkingrich','cloudnine','lookbeforecrossing','ludwigvan','partyongarth','doublecrossed','zombieattack','saveit','topdrawer','swansong','lizardpoisonsspock','shesawitch','firstpost','muffledrapmusic','whatif','ontheqt','virtueofnecessity','knockknockknockpenny','callme','deepwaters','poolboy','friedrice','Ihavefallen','roundrobin','kickyourheels','crimeofpassion'];
+	var otvet=[];
+
+        
+    window.onload = function (){
+      
+      var userAgent = window.navigator.userAgent.toLowerCase();
+      if(userAgent.indexOf('msie') != -1 || userAgent.indexOf('trident') != -1) {
+        alert('Internet Explorer');
+      }
+          
+      src_canvas = document.getElementById("SrcCanvas");
+      src_ctx = src_canvas.getContext("2d");    
+      
+      image = document.getElementById("img_source");
+    }
+     
+  
+    function onDragOver(event){ 
+      event.preventDefault(); 
+    } 
+      
+
+    function onDrop(event){
+      onAddFile(event);
+      event.preventDefault(); 
+    }  
+     
+
+  async function loadModel() {
+  let tbl = document.getElementById ('loading');
+  tbl.innerHTML = "model loading..";
+  console.log("model loading..");
+  model = await tf.loadFrozenModel("https://mmmaks2004.github.io/recsolvemedia/web_model/tensorflowjs_model.pb","https://mmmaks2004.github.io/recsolvemedia/web_model/weights_manifest.json");   
+  tbl.innerHTML = "model loaded..";
+  console.log("model loaded.."); }
+
+
+   function onAddFile(event) {
+      var files;
+      var errflg = false;
+      var reader = new FileReader();
+
+	  tbl = document.getElementById ('predictprocess');
+	  tbl.innerHTML = "Распознавание начато....";		
+	  tbl = document.getElementById ('pr');
+	  tbl.innerHTML = "Шаблон для регулярки:<br>...";		
+	  tbl = document.getElementById ('variants');
+	  tbl.innerHTML = "Возможные варианты по регулярке:<br> ...";		
+	  tbl = document.getElementById ('levenstain');
+	  tbl.innerHTML = "Возможные варианты по Левенштейну:<br> ...";	
+      
+      if(event.target.files){
+        files = event.target.files;
+      }else{ 
+        files = event.dataTransfer.files;   
+      }    
+ 
+
+      reader.onload = function (event) {
+        image.onload = function (){
+				  
+				   src_canvas.width  = image.width;
+                   src_canvas.height = image.height;
+                   src_ctx.drawImage(image,0,0);           
+                   var imagedata = src_canvas.toDataURL();
+				   const batched = tf.tidy(() => {
+						img = tf.fromPixels(src_canvas);
+						return img.expandDims(0);
+					});				   
+				   
+//               let img = tf.fromPixels(src_canvas).expandDims(0);
+                   model.executeAsync({image_tensor: batched})
+                     .then(function(result){  
+						
+						function calculateMaxScores(scores, numBoxes, numClasses) {
+						    const maxes = [];
+							const classes = [];
+							for (let i = 0; i < numBoxes; i++) {
+								let max = Number.MIN_VALUE;
+								let index = -1;
+									for (let j = 0; j < numClasses; j++) {
+										if (scores[i * numClasses + j] > max) {
+											max = scores[i * numClasses + j];
+											index = j;
+										}
+									}
+								maxes[i] = max;
+								classes[i] = index;
+							}
+						return [maxes, classes];
+						}
+
+
+						function levenshtein(s1, s2) {
+							if (s1 === s2) {
+								return 0;
+							} else {
+								var row2 = [];
+								var s1_len = s1.length, s2_len = s2.length;
+								if (s1_len && s2_len) {
+									var i1 = 0, i2 = 0, a, b, c, c2, row = row2;
+									while (i1 < s1_len)
+										row[i1] = ++i1;
+										while (i2 < s2_len) {
+											c2 = s2.charCodeAt(i2);
+											a = i2;
+											++i2;
+											b = i2;
+											for (i1 = 0; i1 < s1_len; ++i1) {
+												c = a + (s1.charCodeAt(i1) === c2 ? 0 : 1);
+												a = row[i1];
+												b = b < a ? (b < c ? b + 1 : c) : (a < c ? a + 1 : c);
+												row[i1] = b;
+											}
+										}
+									return b;
+								} else {
+									return s1_len + s2_len;
+								}
+							}
+						};
+
+
+						function buildDetectedObjects(width, height, boxes, scores, indexes, classes) {
+							var tbl = document.getElementById ('predict');	                    // таблица, с которой работаем
+							var rws = tbl.rows;		   											// коллекция существующих строк таблицы
+							var lst = rws [rws.length - 1];                   		            // последняя (самая нижняя) существующая строка таблицы
+							var cls = lst.cells.length;             							// количество ячеек в последней существующей строке
+							while(tbl.rows.length > 1){
+								tbl.deleteRow(1);
+							}
+				
+							const count = indexes.length;
+							const letters=[];
+							const predl=[[],[],[]];
+							const osX=[];
+							const osY=[];
+							const osXmax=[];
+							const osXmin=[];
+							let pred=[[],[],[],[],[]];
+							let seravg = 0;
+							let seravgX = 0;
+							let countd = 0;
+						
+							for (let i = 0; i < count; i++) {
+								const bbox = [];
+								for (let j = 0; j < 4; j++) {
+									bbox[j] = boxes[indexes[i] * 4 + j];
+								}
+								const minY = bbox[0] * height;
+								const minX = bbox[1] * width;
+								const maxY = bbox[2] * height;
+								const maxX = bbox[3] * width;
+								bbox[0] = minX;
+								bbox[1] = minY;
+								bbox[2] = maxX;
+								bbox[3] = maxY;
+								bbox[4] = (maxX - minX)/2+minX;
+								bbox[5] = (maxY - minY)/2+minY;
+								countd++;
+								seravg=seravg+maxY-minY;
+								seravgX = seravgX+maxX-minX;
+								letters[countd] = classesletter[classes[indexes[i]]];
+								osX[countd]=bbox[4];
+								osY[countd]=bbox[5];
+								osXmax[countd] = maxX;
+								osXmin[countd] = minX;
+								
+	 							var ro = tbl.insertRow (-1);                                    // добавляем снизу ОБРАЗ ещё одной строки
+									for (var l = 0; l < cls; l++) {                             // создаём цикл из cls шагов (по количеству ячеек)
+										var ce = ro.insertCell (-1);  							// на каждом шаге в образ строки добавляем ОБРАЗ новой ячейки
+										 if (l==0) {ce.innerHTML = classesletter[classes[indexes[i]]]; }
+										 if (l==1) {ce.innerHTML = scores[indexes[i]]; }
+										 if (l==2) {ce.innerHTML = bbox[0]; }
+										 if (l==3) {ce.innerHTML = bbox[1]; }
+										 if (l==4) {ce.innerHTML = bbox[2]; }										 
+										 if (l==5) {ce.innerHTML = bbox[3]; }
+										 if (l==6) {ce.innerHTML = bbox[4]; }										 
+										 if (l==7) {ce.innerHTML = bbox[5]; }
+										 
+									}
+									// по завершению цикла, когда ВСЕ ячейки получат содержимое, ОБРАЗ добавленной строки превратится в РЕАЛЬНУЮ строку
+		                    }
+							//выставляем порядок букв
+							seravg = 0.9 * seravg / countd;
+							seravgX = seravgX / countd;
+							//сортируем буквы по оси Х
+							for (let k = 1;k < countd+1; k++) {
+								var smallindex = k
+								for (i = smallindex + 1;i<countd+1; i++) {
+									if (osX[smallindex] > osX[i]) {smallindex = i;}
+								}
+								var Temp1 = osX[k];
+								osX[k] = osX[smallindex];
+								osX[smallindex] = Temp1;
+   
+								Temp1 = osY[k];
+								osY[k] = osY[smallindex];
+								osY[smallindex] = Temp1;
+   
+								Temp1 = letters[k];
+								letters[k] = letters[smallindex];
+								letters[smallindex] = Temp1;
+								
+								Temp1 = osXmax[k];
+								osXmax[k] = osXmax[smallindex];
+								osXmax[smallindex] = Temp1;
+   
+								Temp1 = osXmin[k];
+								osXmin[k] = osXmin[smallindex];
+								osXmin[smallindex] = Temp1;
+								
+							}
+							
+							//определяем строки
+							var kvo_strok = 1;
+							pred[1][0] = 1;
+							pred[1][1] = 1;
+							for (k = 2; k < countd+1; k++) {
+								smallindex = 99999;
+								for (i = 1; i<kvo_strok+1; i++) {
+									if (Math.abs(osY[k] - osY[pred[i][pred[i][0]]]) < smallindex) {
+										smallindex = Math.abs(osY[k] - osY[pred[i][pred[i][0]]]);
+										smallindexp = i;
+									}
+								}
+								if (smallindex <= seravg) {
+									pred[smallindexp][0] = pred[smallindexp][0] + 1;		//к-во букв в строке
+									pred[smallindexp][pred[smallindexp][0]] = k; } else {	
+							        kvo_strok = kvo_strok + 1;
+									pred[kvo_strok][0] = 1;
+									pred[kvo_strok][1] = k;
+								}
+							}
+							
+							for (k = 1; k < kvo_strok+1; k++) {
+								pred[k][0] = k;
+							}
+							
+							//определяем порядок строк
+							for (k = 1; k< kvo_strok+1; k++) {
+								smallindex = k;
+								for (i = smallindex + 1; i < kvo_strok+1; i++) {
+									if (osY[pred[k][1]] > osY[pred[i][1]]) {smallindex = i;}
+								}
+								Temp1 = pred[k][0];
+								pred[k][0] = pred[smallindex][0];
+								pred[smallindex][0] = Temp1;
+							}
+							
+							//формируем поисковый запрос
+							for (k = 1; k < kvo_strok+1; k++) {
+								for (i = 1; i < pred[k].length+1; i++) {
+									predl[1][(pred[k][0] - 1) * 20 + i] = letters[pred[k][i]];
+									if (i < pred[k].length) {
+										    if (letters[pred[k][i + 1]]==null||letters[pred[k][i + 1]]==undefined) { Temp1=".*?";} else {
+												if (osXmin[pred[k][i + 1]] - osXmax[pred[k][i]] < 5) {Temp1="";} else {Temp1=".*?";}
+											}
+											predl[2][(pred[k][0] - 1) * 20 + i] = letters[pred[k][i]]+Temp1;		
+									}
+								}
+							}
+							
+							var output_p="";
+							var output_p2="";
+							for (k = 1; k < predl[1].length+1; k++) {
+								output_p = output_p + predl[1][k];
+								output_p2 = output_p2 + predl[2][k];
+							}
+							output_p=output_p.replace(/undefined/g,'');
+							output_p2=output_p2.replace(/undefined/g,'');
+							tbl = document.getElementById ('pr');
+							tbl.innerHTML = "Выбранные буквы и запрос для регулярки:<br>"+output_p+"<br>"+output_p2;
+
+							//выполняем запрос
+							var re = new RegExp('.*?'+output_p2,'i');
+							
+							k=0;
+							otvet=[];
+							
+							for (i=0; i<variants_predict.length; i++) {
+								found = variants_predict[i].search(re);
+								if (found>=0) {otvet[k]=variants_predict[i];k++;}
+							}
+							
+							tbl = document.getElementById ('variants');
+							tbl.innerHTML = "Возможные варианты по регулярке:<br>";
+							if (otvet!=null) {
+								var otvet_all=""
+								for (i=0; i<otvet.length; i++) {
+									otvet_all =otvet_all+otvet[i]+'<br>';
+								}
+								tbl.innerHTML = "Возможные варианты по регулярке:<br>"+otvet_all;
+							}
+						
+							//нечеткий поиск по Расстоянию Левенштейна
+							
+							if ((otvet==null||otvet.length==0||otvet.length>1)&&output_p.length>2) {
+								var min_otvet=999999;
+								var diff=999991;
+								k=0;
+								for (i=0; i<variants_predict.length; i++) {
+									if (variants_predict[i].length>=output_p.length) {
+										diff = levenshtein(variants_predict[i], output_p); 
+										if (diff==min_otvet) {
+											otvet[k]=variants_predict[i];
+											k++;
+											min_otvet=diff;
+										}
+										if (diff<min_otvet) {
+											otvet=[];
+											otvet[0]=variants_predict[i];
+											k=1;
+											min_otvet=diff;
+										}
+	
+
+									}	
+								}
+								tbl = document.getElementById ('levenstain');
+								tbl.innerHTML = "Возможные варианты по Левенштейну:<br>";
+								if (otvet!=null||otvet.length>0) {
+									otvet_all=""
+									for (i=0; i<otvet.length; i++) {
+										otvet_all =otvet_all+otvet[i]+'<br>';
+									}
+									tbl.innerHTML = "Возможные варианты по Левенштейну:<br>"+otvet_all;
+								}
+							}
+
+							tbl = document.getElementById ('predictprocess');
+							tbl.innerHTML = "Распознавание завершено";		
+							
+														
+						}
+
+                            	 
+                       detection_boxes = result[1].dataSync();
+                       detection_scores = result[0].dataSync();
+ 
+					   const [maxScores, classes] = calculateMaxScores(detection_scores, result[0].shape[1], result[0].shape[2]);
+					   const prevBackend = tf.getBackend();
+					   // run post process in cpu
+					   const maxNumBoxes=30;
+					   tf.setBackend('cpu');
+					   const indexTensor = tf.tidy(() => {
+						const boxes2 = tf.tensor2d(detection_boxes, [result[1].shape[1], result[1].shape[3]]);
+						return tf.image.nonMaxSuppression(boxes2, maxScores, maxNumBoxes, 0.5, 0.5);
+						});                                      
+				
+						
+					   const indexes = indexTensor.dataSync();
+					   batched.dispose();
+    				   tf.dispose(result);
+				       indexTensor.dispose();
+					   console.log(indexes);
+
+						// restore previous backend
+					   tf.setBackend(prevBackend);    
+			   const createtable = buildDetectedObjects(image.width, image.height, detection_boxes, maxScores, indexes, classes)
+	                              
+               });                    
+          
+         }
+     
+      image.src = reader.result;       
+		
+      };
+      
+      if (files[0]){    
+        run_flg = true;    
+        reader.readAsDataURL(files[0]); 
+        filename = files[0].name;
+        document.getElementById("inputfile").value = '';
+      }
+    }	
+
+
+
+
+
+    </script> 
+    </head>
+    <body ondrop="onDrop(event);" ondragover="onDragOver(event);"> 
+    <div>
+		<canvas id="SrcCanvas" style="margin:0;paddling:0;"></canvas>
+		<img id="img_source" style="display: none;">
+	</div>
+	<br>
+    <div>
+		<input type="file" id="inputfile" accept="image/jpeg,image/png,image/gif,image/bmp,image/x-icon" onchange="onAddFile(event);">
+		<button id="load_model" onclick="loadModel();">Load Model</button>
+	</div>
+	<br>
+	<div id='loading'></div>
+	<br>
+	  <div>
+		<table id="predict" border cellpadding="2">
+			<tr><th>Назание буквы</th><th>Вероятность</th><th>minX</th><th>minY</th><th>maxX</th><th>maxY</th><th>CentrX</th><th>CentrY</th></tr>
+			<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+		</table>
+     </div>
+	<br>
+	<div id='predictprocess'></div>
+	<br>
+	<div id='pr'></div>
+	<br>
+	<div id='variants'>
+		Возможные варианты по регулярке:<br>
+	</div>
+	<br>
+	<div id='levenstain'>
+		Возможные варианты по Левенштейну:<br>
+	</div>
+	
+	
+    </body>
+    </html> 
